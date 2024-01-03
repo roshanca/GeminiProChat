@@ -1,17 +1,71 @@
 # GeminiProChat
 
-Minimal web UI for GeminiPro Chat.
+English | [中文](README_cn.md) | [Italiano](README_it.md)
+
+Minimal web UI for Gemini Pro Chat.
 
 Live demo: [Gemini Pro Chat](https://www.geminiprochat.com)
 
 [![image](https://github.com/babaohuang/GeminiProChat/assets/559171/d02fd440-401a-410d-a112-4b10935624c6)](https://www.geminiprochat.com)
 
-## Acknowledgements
+## Deploy
 
-This project is inspired by and based on the following open-source project:
+### Deploy With Vercel(Recommended)
 
-- [ChatGPT-Demo](https://github.com/anse-app/chatgpt-demo) - For the foundational codebase and features.
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/babaohuang/GeminiProChat&env=GEMINI_API_KEY&envDescription=Google%20API%20Key%20for%20GeminiProChat&envLink=https://makersuite.google.com/app/apikey&project-name=gemini-pro-chat&repository-name=gemini-pro-chat&demo-title=Gemini%20Pro%20Chat&demo-description=Minimal%20web%20UI%20for%20Gemini%20Pro.&demo-url=https%3A%2F%2Fgeminiprochat.com&demo-image=https%3A%2F%2Fgeminiprochat.com%2Ficon.svg)
 
+Just click the button above and follow the instructions to deploy your own copy of the app.
+
+> [!NOTE]
+> #### Solution for "User location is not supported for the API use"
+> If you encounter the issue **"User location is not supported for the API use"**, follow these steps to resolve it:
+>
+> 1. Go to this [**palm-netlify-proxy**](https://github.com/antergone/palm-netlify-proxy) repo and click **"Deploy With Netlify"**.
+> 2. Once the deployment is complete, you will receive a domain name assigned by Netlify (e.g., `https://xxx.netlify.app`).
+> 3. In your **Gemini Pro Chat** project, set an environment variable named `API_BASE_URL` with the value being the domain you got from deploying the palm proxy (`https://xxx.netlify.app`).
+> 4. Redeploy your **Gemini Pro Chat** project to finalize the configuration. This should resolve the issue.
+>
+> Thanks to [**antergone**](https://github.com/antergone/palm-netlify-proxy) for providing this solution.
+
+### Deploy on Railway
+
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/v9QL5u?referralCode=tSzmIe)
+
+Just click the button above and follow the instructions to deploy on Railway.
+
+### Deploy on Zeabur
+
+[![Deploy on Zeabur](https://zeabur.com/button.svg)](https://zeabur.com/templates/1103PJ)
+
+Just click the button above and follow the instructions to deploy on Zeabur.
+
+### Deploy With Docker
+
+To deploy with Docker, you can use the following command:
+
+```bash
+docker run --name geminiprochat \
+--restart always \
+-p 3000:3000 \
+-itd \
+-e GEMINI_API_KEY=your_api_key_here \
+babaohuang/geminiprochat:latest
+```
+Please make sure to replace `your_api_key_here` with your own GEMINI API key.
+
+This will start the **geminiprochat** service, accessible at `http://localhost:3000`. 
+
+## Environment Variables
+
+You can control the website through environment variables.
+
+| Name | Description | Required |
+| --- | --- | --- |
+| `GEMINI_API_KEY` | Your API Key for GEMINI. You can get it from [here](https://makersuite.google.com/app/apikey).| **✔** |
+| `API_BASE_URL` | Custom base url for GEMINI API. Click [here](https://github.com/babaohuang/GeminiProChat?tab=readme-ov-file#solution-for-user-location-is-not-supported-for-the-api-use) to see when to use this. | ❌ |
+| `HEAD_SCRIPTS` | Inject analytics or other scripts before `</head>` of the page | ❌ |
+| `PUBLIC_SECRET_KEY` | Secret string for the project. Use for generating signatures for API calls | ❌ |
+| `SITE_PASSWORD` | Set password for site, support multiple password separated by comma. If not set, site will be public | ❌ |
 
 ## Running Locally
 
@@ -38,67 +92,30 @@ This project is inspired by and based on the following open-source project:
     pnpm install
    ```
 
-2. Copy the `.env.example` file, then rename it to `.env`, and add your [GEMINI API key](https://makersuite.google.com/app/apikey) to the `.env` file.
+2. Copy the `.env.example` file, then rename it to `.env`, and add your [`GEMINI_API_KEY`](https://makersuite.google.com/app/apikey) to the `.env` file.
 
    ```bash
     GEMINI_API_KEY=AIzaSy...
    ```
 
-3. Run the application, the local project runs on `http://localhost:3000/`
+3. Run the application, the local project runs on `http://localhost:3000/`.
 
    ```bash
     pnpm run dev
    ```
 
-## Environment Variables
+## Acknowledgements
 
-You can control the website through environment variables.
+This project is inspired by and based on the following open-source project:
 
-| Name | Description | Required |
-| --- | --- | --- |
-| `GEMINI_API_KEY` | Your API Key for GEMINI. You can get it from [here](https://makersuite.google.com/app/apikey).| **Yes** |
-| `API_BASE_URL` | Custom base url for GEMINI API. Click [here](https://github.com/babaohuang/GeminiProChat?tab=readme-ov-file#solution-for-user-location-is-not-supported-for-the-api-use) to see when to use this. | No |
-| `HEAD_SCRIPTS` | Inject analytics or other scripts before `</head>` of the page | No |
-| `PUBLIC_SECRET_KEY` | Secret string for the project. Use for generating signatures for API calls | No |
-| `SITE_PASSWORD` | Set password for site, support multiple password separated by comma. If not set, site will be public | No |
-
-## Deploy
-
-### Deploy With Vercel(Recommended)
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/babaohuang/GeminiProChat&env=GEMINI_API_KEY&envDescription=Google%20API%20Key%20for%20GeminiProChat&envLink=https://makersuite.google.com/app/apikey)
-
-Just click the button above and follow the instructions to deploy your own copy of the app.
-
-> [!NOTE]
-> #### Solution for "User location is not supported for the API use"
-> If you encounter the issue **"User location is not supported for the API use"**, follow these steps to resolve it:
->
-> 1. Go to this [**palm-proxy**](https://github.com/antergone/palm-proxy) repo and click **"Deploy With Vercel"**.
-> 2. Once the deployment is complete, you will receive a domain name assigned by Vercel (e.g., `https://xxx.vercel.app`).
-> 3. In your **Gemini Pro Chat** project, set an environment variable named `API_BASE_URL` with the value being the domain you got from deploying the gemini proxy (`https://xxx.vercel.app`).
-> 4. Redeploy your **Gemini Pro Chat** project to finalize the configuration. This should resolve the issue.
->
-> Thanks to [**antergone**](https://github.com/antergone/palm-proxy) for providing this solution.
-
-### Deploy With Docker
-
-Although this project provides a Dockerfile, there is currently a known bug with the Docker deployment method. I am actively working on fixing this issue. Therefore, Docker deployment is not recommended at this moment. If any contributors have a solution to fix this bug, your contributions are highly welcomed. Please feel free to submit a Pull Request (PR) to help me resolve this issue.
+- [ChatGPT-Demo](https://github.com/anse-app/chatgpt-demo) - For the foundational codebase and features.
 
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=babaohuang/geminiprochat&type=Timeline)](https://star-history.com/#babaohuang/geminiprochat&Timeline)
 
-## WeChat Official Account
+## Buy me a coffee
 
-If you are interested in exploring AI, feel free to follow my WeChat Official Account!
+If this repo is helpful to you, buy me a coffee,thank you very much!😄
 
-<img src="https://github.com/babaohuang/GeminiProChat/assets/559171/5503a4a0-fbbb-40c4-938f-06e61ba4186f" width="285" height="104">
-
-## Support
-
-If you like my project and would like to show your appreciation, you can scan the WeChat reward QR code below:
-
-<img src="https://github.com/babaohuang/GeminiProChat/assets/559171/ed04a81b-48ff-4c17-92be-4ad290eb3de3" width="208" height="208">
-
-Thank you for your support!
+<a href="https://www.buymeacoffee.com/babaohuang" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
